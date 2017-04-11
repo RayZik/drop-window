@@ -1,0 +1,22 @@
+<div>
+  <div class="row centered">
+    <div class="col col-6">
+      <h1>SSL pricelist</h1>
+      <table *ngIf="pricelist">
+        <tbody>
+          <tr *ngFor="let item of pricelist">
+            <td>
+              <div class="isHover">
+                <a (mouseover)='setId(item.id)'>{{ item.name }}</a>
+                <div *ngIf='item.id === id' class='drop-window'>
+                  <drop-window [id]='id'></drop-window>
+                </div>
+              </div>
+            </td>
+            <td> от {{ item.price.period[0].cost }} {{ item.price.currency }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
