@@ -14,10 +14,11 @@ export class DropWindowComponent implements OnInit, OnChanges {
     @Input() id: string;
     private chanage: string;
 
+
     constructor(private appService: AppService) { }
 
     ngOnInit() {
-
+        this.positionDropWindow();
     }
 
     ngOnChanges(changes: SimpleChanges): void {
@@ -28,6 +29,18 @@ export class DropWindowComponent implements OnInit, OnChanges {
                 .subscribe((data) => {
                     this.dataContainer.nativeElement.innerHTML = data['description_ru'] || data['description'] || '<div>Нет описания</div>';
                 });
+        }
+    }
+
+    positionDropWindow() {
+        let elem = document.getElementById('message');
+        let bound = elem.getBoundingClientRect();
+        let windowHeigth = document.documentElement.clientHeight;
+        let diff = windowHeigth - bound.top;
+
+        if (bound.height > diff) {
+            elem.style.top = (elem.offsetTop - bound.height - 25).toString() + 'px';
+            elem.style.boxShadow = '-1px -3px 20px 4px #b2b2b2';
         }
     }
 }
